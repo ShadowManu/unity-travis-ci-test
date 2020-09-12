@@ -18,4 +18,4 @@ jobs:
   include:
   - stage: build
     env: BUILD_TARGET=WebGL IMAGE_NAME=gableroux/unity3d:2020.1.4f1-webgl
-    script: chmod +x ./ci/docker_build.sh && ./ci/docker_build.sh && ./scripts/deploy.sh
+    script: chmod +x ./ci/docker_build.sh && ./ci/docker_build.sh && chmod +x ./scripts/deploy.sh && ./scripts/deploy.sh
