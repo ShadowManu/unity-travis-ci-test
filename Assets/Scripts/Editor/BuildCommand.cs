@@ -178,6 +178,9 @@ static class BuildCommand
 
         SetScriptingBackendFromEnv(buildTarget);
 
+        // GG WP if this works;
+        PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Disabled;
+
         var buildReport = BuildPipeline.BuildPlayer(GetEnabledScenes(), fixedBuildPath, buildTarget, buildOptions);
 
         if (buildReport.summary.result != UnityEditor.Build.Reporting.BuildResult.Succeeded)
