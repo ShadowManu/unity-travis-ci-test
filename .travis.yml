@@ -2,7 +2,10 @@ sudo: required
 language: bash
 env:
   global:
-  - BUILD_NAME=ExampleProjectName
+  - BUILD_NAME: ExampleProjectName
+  - GH_USER: shadowmanu
+  - GH_REPO: unity-travis-ci-test
+  - secure: cO/z4HPREy359eZNnLTAaCV9K58GeDja/XDnTjVMyzDqEclb7X75a8DhUdhGnkP0JlQweFWN0Im+37ys5QXuL2LtHXNM/TQzA3PLYxI8yGHPDLhWTr4xE+i3Q1mUUl+5eBRirlZtw/1gQicZHgy56a88kIQzqQd7mdwhsJLSxTMBBQqJnIVRDoDCr049JhUoPruXUzG/X7dgHFmvEAdBVVbOb8EAUQRs7qcwyvgxVC/CrzRotdezL0UpM69NraGgTmbyY6USmc23zJLhZG8Dgex0t0AVTVhZE8/gFZA5x35sozoL01Dmt89ooPhDCLSlpDdVVGyu2rcJ5FTDHs1a8CUKrSHJy1NhwgmWIPayfR6pvxaqyCoaBLnl67hBxkZde7HH9AIOZwzmNJ9W0LEDDL6oIKgwKWoxkNywvA4tQtjgcAeqp8eVnEwQlZ4ooUpkiNvIdbQpDbAWBPMV9V+2++MCORPcOKE9ghTkWTHKzKSUiNS/vzrkOl21AmtH5G12WWmzD7Zga9ss1r/OXXi9KF5ZqVaJwmTu9T393mhFq/18fkBkYq/rRpUPNZRoYMLrmJMAv0EoEA9OqWe+YDZeINByGVkcC+02ieQOGAEU86a3WyDo8EWs/K/8Un+SJUKC/D+HidUB9uvsJ2hbSvXPNqO9vgqnsobSfXOt7zyJFiQ=
 services:
 - docker
 before_install:
@@ -15,9 +18,4 @@ jobs:
   include:
   - stage: build
     env: BUILD_TARGET=WebGL IMAGE_NAME=gableroux/unity3d:2020.1.4f1-webgl
-    script: "chmod +x ./ci/docker_build.sh && ./ci/docker_build.sh"
-    addons:
-      artifacts:
-        s3_region: "us-west-1"
-        paths:
-        - "./Builds/"
+    script: chmod +x ./ci/docker_build.sh && ./ci/docker_build.sh && ./scripts/deploy.sh
